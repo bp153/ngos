@@ -1,0 +1,40 @@
+.row_height{
+    height:100vh;
+
+    .login_img{
+        background-color: #0E592F;
+        height:100%;
+    }
+
+    .login_container{
+        height:100%;
+        padding:50px;
+        background-color:#F7F4F5;
+
+        .form-control:focus{
+            border-color: none;
+            box-shadow: none;
+        }
+        form{
+            padding:20px;
+            
+            input{
+                height:50px;
+            }
+
+            button{
+                height:50px;
+                background-color: 
+                #0E592F;
+                color: #ffffff;
+            }
+        }
+    }
+}
+
+@media (max-width: 991.98px){ 
+    .login_img{
+        display: none;
+    }
+ }
+

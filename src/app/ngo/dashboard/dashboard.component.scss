@@ -1,0 +1,27 @@
+
+.data-card{
+    padding:15px;
+    background-color: #ffffff !important;
+    
+}
+
+
+
+.graph-card{
+    height:270px;
+}
+
+
+.row-margin{
+    margin-bottom:20px !important;
+}
+
+@media (max-width: 991.98px){ 
+    .data-card{
+        margin-bottom:20px;
+    }
+    .card-marg{
+        margin-bottom: 0;
+    }
+ }
+

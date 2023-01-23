@@ -1,0 +1,86 @@
+<div class="container-fluid bg">
+    <div class="container-fluid">
+        <ngx-spinner
+        bdColor="rgba(51,51,51,0.8)"
+        size="medium"
+        color="#fff"
+        type="ball-spin"
+      
+        [fullScreen] = "true"
+      >
+        <p style="font-size: 20px; color: white">Adding entry...</p>
+      </ngx-spinner>
+    <div class="title"><i class="bi bi-speedometer"></i> {{title}}</div>
+
+    <div class="form-container">
+
+        <form>
+            
+            <label >Select Month</label><br>
+
+            <input class="form-control" [(ngModel)]='data.month' type="month"  name="month"><br>
+            <label>Community Durbars</label>
+            <input required name="durbar" [(ngModel)]='data.durbar' type="number" class="form-control">
+
+            <label>Sensitization sessions at churches</label>
+            <input required name="churches" [(ngModel)]='data.churches'type="number" class="form-control">
+
+            <label>Sensitization sessions at Mosques</label>
+            <input required name="mosques" [(ngModel)]='data.mosques'type="number" class="form-control">
+
+            <label>Sensitization sessions at Community town halls</label>
+            <input required name="town_hall" [(ngModel)]='data.town_hall'type="number" class="form-control">
+
+            <label>Sensitization sessions at Markets</label>
+            <input required type="number" name="markets"[(ngModel)]='data.markets'class="form-control">
+
+            <label>Sensitization sessions at Funerals</label>
+            <input required name="funerals" [(ngModel)]='data.funerals'type="number" class="form-control">
+
+            <label>Video shows</label>
+            <input required name="video_shows" [(ngModel)]='data.video_shows'type="number" class="form-control">
+
+            <label>Community Announcements (Information Center)</label>
+            <input required name="community_announcements"[(ngModel)]='data.community_announcements' type="number" class="form-control">
+
+            <label>Radio discussions</label>
+            <input name="radio"[(ngModel)]='data.radio' type="number" class="form-control">
+
+            <label>Mobile van announcements</label>
+            <input required type="number" name='van'[(ngModel)]='data.van'class="form-control">
+
+            <label>Total number of people reached through IE&C</label>
+            <input required name="people_reached" [(ngModel)]='data.mobile_van'type="number" class="form-control">
+
+            <label>Total number of pregnant women identified</label>
+            <input required name="pregnant_women_identified" type="number"[(ngModel)]='data.total_pregnant_women' class="form-control">
+
+            <label>Total number of pregnant women followed up</label>
+            <input required name="pregnant_women_followed"[(ngModel)]='data.pregnant_women' type="number" class="form-control">
+
+            <header>Total Number of pregnant women who took any dose</header>
+            <hr>
+            <label>IPTP1</label>
+            <input requiredtype="number"[(ngModel)]='data.iptp_one' name="iptp_one"class="form-control">
+
+            <label>IPTP2</label>
+            <input required name="durbar" [(ngModel)]='data.iptp_two'name="iptp_two"type="number" class="form-control">
+
+            <label>IPTP3</label>
+            <input required type="number" [(ngModel)]='data.iptp_three'name="iptp_three" class="form-control">
+
+            <label>IPTP4</label>
+            <input  requiredt ype="number" [(ngModel)]='data.iptp_four'name="iptp_four" class="form-control">
+
+            <label>IPTP5</label>
+            <input required type="number" [(ngModel)]='data.iptp_five 'name="iptp_five" class="form-control"><br>
+            <button (click)="submitForm()"class="form-control btn ">Add entry</button>
+            <p *ngIf="!loggedIn">
+                <ngb-alert [dismissible]="true" [type]="danger" >
+                    <strong>Entry is succesful</strong>
+                  </ngb-alert>
+    
+                </p>
+        </form>
+    </div>
+</div>

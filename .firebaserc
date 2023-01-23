@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "ngos-89bd0": {
+      "hosting": {
+        "ngos-app": [
+          "ngos-89bd0"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "ngos-89bd0"
+  }
+}
