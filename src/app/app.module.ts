@@ -41,6 +41,7 @@ import * as FusionCharts from 'fusioncharts';
 // Load FusionCharts Individual Charts
 import * as Charts from 'fusioncharts/fusioncharts.charts';
 FusionChartsModule.fcRoot(FusionCharts, Charts)
+import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
 
 @NgModule({
   declarations: [
