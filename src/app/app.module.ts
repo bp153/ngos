@@ -31,6 +31,16 @@ import { providePerformance,getPerformance } from '@angular/fire/performance';
 import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { DisplayEntryComponent } from './ngo/display-entry/display-entry.component';
+import { MonthlyExcelReportsComponent } from './ngo/monthly-excel-reports/monthly-excel-reports.component';
+
+import { FusionChartsModule } from 'angular-fusioncharts';
+
+// Import FusionCharts library
+import * as FusionCharts from 'fusioncharts';
+
+// Load FusionCharts Individual Charts
+import * as Charts from 'fusioncharts/fusioncharts.charts';
+FusionChartsModule.fcRoot(FusionCharts, Charts)
 
 @NgModule({
   declarations: [
@@ -45,7 +55,8 @@ import { DisplayEntryComponent } from './ngo/display-entry/display-entry.compone
     SupervisorDashboardComponent,
     AddNgoComponent,
     AddUserComponent,
-    DisplayEntryComponent
+    DisplayEntryComponent,
+    MonthlyExcelReportsComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +75,7 @@ import { DisplayEntryComponent } from './ngo/display-entry/display-entry.compone
     providePerformance(() => getPerformance()),
     provideRemoteConfig(() => getRemoteConfig()),
     provideStorage(() => getStorage()),
-    
+    FusionChartsModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
   providers: [

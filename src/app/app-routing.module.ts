@@ -6,6 +6,7 @@ import { DashboardComponent } from './ngo/dashboard/dashboard.component';
 import { EntryFormComponent } from './ngo/entry-form/entry-form.component';
 import { ReportComponent } from './ngo/report/report.component';
 import { DisplayEntryComponent} from './ngo/display-entry/display-entry.component';
+import { MonthlyExcelReportsComponent } from './ngo/monthly-excel-reports/monthly-excel-reports.component';
 
 import { ReportsComponent} from './supervisor/reports/reports.component';
 import { AddNgoComponent} from './supervisor/add-ngo/add-ngo.component';
@@ -23,6 +24,7 @@ children: [
   { path: 'report', component: ReportComponent},
   { path: 'add-ngo', component: AddNgoComponent},
   { path: 'display-entries', component: DisplayEntryComponent},
+  { path: 'monthly-excel-reports', component: MonthlyExcelReportsComponent},
 ] },
 {path: 'supervisor', component: TempPageComponent,
 children: [
