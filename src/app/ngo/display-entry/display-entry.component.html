@@ -1,1 +1,15 @@
-<p>display-entry works!</p>
+<div class="container-fluid bg">
+<div class="row">
+    <div *ngFor="let data of info; index as i" class="column col-lg-3 col-md-6">
+        <div (click)="showRecord()" class="card">
+           <div>id number: {{data.id}}</div>
+           <div>churches: {{data.churches}}</div>
+           <div>mosques: {{data.mosques}}</div>
+           <div>Date created: {{data.created_at}}</div>
+        </div>
+    </div>
+
+
+</div>
+
+</div>

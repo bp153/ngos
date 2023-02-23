@@ -1,0 +1,35 @@
+<div class="container-fluid bg">
+    <div class="title"><i class="bi bi-speedometer"></i> {{ title }}</div>
+    <div class="sub-title">Download all entries made to excel</div>
+
+    <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Month of Entry</th>
+            <th scope="col">Year</th>
+            <th scope="col">churches</th>
+            <th scope="col">mosques</th>
+            <th scope="col">town halls</th>
+            <th scope="col">NGO name</th>
+          
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let info of data; index as i">
+            
+            <td>{{i+1}}</td>
+            <td>{{info.month}}</td>
+            <td>{{info.year}}</td>
+            <td>{{info.churches}}</td>
+            <td>{{info.mosques}}</td>
+            <td>{{info.town_halls}}</td>
+            <td>{{info.ngo_name}}</td>
+
+          </tr>
+ 
+        </tbody>
+        
+      </table>
+      <button (click)="exportData()" class="btn export">Export</button>
+</div>

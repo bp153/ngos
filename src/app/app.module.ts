@@ -3,6 +3,9 @@ import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './shared/auth.interceptor';
+import { HighchartsChartModule } from 'highcharts-angular';
 
 import {NgbAlert} from '@ng-bootstrap/ng-bootstrap';
 
@@ -19,29 +22,30 @@ import { SupervisorDashboardComponent } from './supervisor/supervisor-dashboard/
 import { AddNgoComponent } from './supervisor/add-ngo/add-ngo.component';
 import { AddUserComponent } from './supervisor/add-user/add-user.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+
 import { environment } from '../environments/environment';
-import { provideAnalytics,getAnalytics,ScreenTrackingService,UserTrackingService } from '@angular/fire/analytics';
-import { provideAuth,getAuth } from '@angular/fire/auth';
-import { provideDatabase,getDatabase } from '@angular/fire/database';
-import { provideFirestore,getFirestore } from '@angular/fire/firestore';
-import { provideFunctions,getFunctions } from '@angular/fire/functions';
-import { provideMessaging,getMessaging } from '@angular/fire/messaging';
-import { providePerformance,getPerformance } from '@angular/fire/performance';
-import { provideRemoteConfig,getRemoteConfig } from '@angular/fire/remote-config';
+
 import { provideStorage,getStorage } from '@angular/fire/storage';
 import { DisplayEntryComponent } from './ngo/display-entry/display-entry.component';
 import { MonthlyExcelReportsComponent } from './ngo/monthly-excel-reports/monthly-excel-reports.component';
+import { ViewEntryComponent } from './ngo/view-entry/view-entry.component';
+import { AllExcelReportComponent } from './ngo/all-excel-report/all-excel-report.component';
 
-import { FusionChartsModule } from 'angular-fusioncharts';
+import { ChartModule } from 'angular-highcharts';
+import { YearlyReportComponent } from './ngo/yearly-report/yearly-report.component';
+import { CannotAccessComponent } from './ngo/cannot-access/cannot-access.component';
+import { YearlyReportsComponent } from './supervisor/yearly-reports/yearly-reports.component';
+import { AllReportsComponent } from './supervisor/all-reports/all-reports.component';
+import { SupervisorTopNavComponent } from './supervisor/supervisor-top-nav/supervisor-top-nav.component';
+import { SupervisorTempComponent } from './supervisor/supervisor-temp/supervisor-temp.component';
+import { YearlyDashboardComponent } from './ngo/yearly-dashboard/yearly-dashboard.component';
 
-// Import FusionCharts library
-import * as FusionCharts from 'fusioncharts';
+import { UpdateAccountComponent } from './ngo/update-account/update-account.component';
+import { SupervisorYearlyReportsComponent } from './supervisor/supervisor-yearly-reports/supervisor-yearly-reports.component';
+import { SsupervisorReportsComponent } from './supervisor/ssupervisor-reports/ssupervisor-reports.component';
+import { SupervisorAllReportsComponent } from './supervisor/supervisor-all-reports/supervisor-all-reports.component';
 
-// Load FusionCharts Individual Charts
-import * as Charts from 'fusioncharts/fusioncharts.charts';
-FusionChartsModule.fcRoot(FusionCharts, Charts)
-import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
+
 
 @NgModule({
   declarations: [
@@ -57,30 +61,40 @@ import * as FusionTheme from "fusioncharts/themes/fusioncharts.theme.fusion";
     AddNgoComponent,
     AddUserComponent,
     DisplayEntryComponent,
-    MonthlyExcelReportsComponent
+    MonthlyExcelReportsComponent,
+    ViewEntryComponent,
+    AllExcelReportComponent,
+    YearlyReportComponent,
+    CannotAccessComponent,
+    YearlyReportsComponent,
+    AllReportsComponent,
+    SupervisorTopNavComponent,
+    SupervisorTempComponent,
+    YearlyDashboardComponent,
+
+    UpdateAccountComponent,
+     SupervisorYearlyReportsComponent,
+     SsupervisorReportsComponent,
+     SupervisorAllReportsComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
+    HttpClientModule,
     FormsModule,
+    HighchartsChartModule,
     BrowserAnimationsModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' }),
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAnalytics(() => getAnalytics()),
-    provideAuth(() => getAuth()),
-    provideDatabase(() => getDatabase()),
-    provideFirestore(() => getFirestore()),
-    provideFunctions(() => getFunctions()),
-    provideMessaging(() => getMessaging()),
-    providePerformance(() => getPerformance()),
-    provideRemoteConfig(() => getRemoteConfig()),
-    provideStorage(() => getStorage()),
-    FusionChartsModule
+
+    ChartModule 
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA,NO_ERRORS_SCHEMA],
   providers: [
-    ScreenTrackingService,UserTrackingService,NgbAlert
+    NgbAlert,
+    {provide: HTTP_INTERCEPTORS,
+    useClass: AuthInterceptor,
+    multi: true}
   ],
   bootstrap: [AppComponent]
 })

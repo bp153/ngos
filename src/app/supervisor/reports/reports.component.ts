@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reports',
@@ -7,9 +8,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ReportsComponent implements OnInit {
 
-  constructor() { }
+  public title:String;
+  constructor(private router:Router) { 
+    this.title="Reports";
+  }
 
   ngOnInit(): void {
   }
 
+  viewAllReports(){
+    this.router.navigate(['ngo/all-entries']);
+  }
+
+  yearlyReport(){
+    this.router.navigate(['ngo/yearly-report']);
+  }
 }

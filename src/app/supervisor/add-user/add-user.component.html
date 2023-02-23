@@ -1,1 +1,42 @@
-<p>add-user works!</p>
+<div class="container-fluid bg">
+    <div class="title"><i class="bi bi-speedometer"></i> {{title}}</div>
+    <div>Create account for NGOs</div>
+    <div class="form-container">
+<form ngNativeValidate #form>
+    <ngb-toast class=" bg-success text-light toast-container position-fixed left-0 " [autohide]="true" *ngIf="!staticAlertClosed" > {{successMessage}} </ngb-toast>
+    <label>First Name</label>
+    <input [(ngModel)]='user.first_name' name="first_name" class="form-control"type="text">
+
+    <label>Last Name</label>
+    <input [(ngModel)]='user.last_name' name="last_name" class="form-control" type="text">
+
+    <label>Username</label>
+    <input  [(ngModel)]='user.username' name="username" class="form-control" type="text">
+
+    
+    <label>Password</label>
+    <input [(ngModel)]='user.password' name="password" class="form-control" type="password">
+
+    <label>Email</label>
+    <input class="form-control" type="email">
+
+    <label>Select NGO </label>
+    <select [(ngModel)]='user.ngo_id' name="ngo_id" class="form-control">
+        <option *ngFor="let ngo of ngos; index as i" value="{{ngo.id}}">{{ngo.ngo_name}}</option>
+    </select>
+
+    <button (click)="form.checkValidity()? submit(): null" class="form-control btn btn-success ">Add User</button><br><br>
+</form>
+</div>
+</div>
+
+<ngx-spinner
+bdColor="rgba(51,51,51,0.8)"
+size="medium"
+color="#fff"
+type="ball-spin"
+
+[fullScreen] = "true"
+>
+<p style="font-size: 20px; color: white">Adding user...</p>
+</ngx-spinner>

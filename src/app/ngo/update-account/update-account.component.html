@@ -1,0 +1,35 @@
+<div class="container-fluid bg">
+   
+    <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-spin"
+  
+    [fullScreen] = "true"
+  >
+    <p style="font-size: 20px; color: white">Updating account...</p>
+  </ngx-spinner>
+<div class="title"><i class="bi bi-speedometer"></i> {{title}}</div>
+
+<div class="form-container">
+  <ngb-toast class=" bg-success text-light toast-container position-fixed left-0 " [autohide]="true" *ngIf="!staticAlertClosed" > {{successMessage}} </ngb-toast>
+    
+    <form method="POST" ngNativeValidate #form>
+            
+
+
+
+      <label>Username</label>
+      <input required name="username" [(ngModel)]='data.username'type="text" class="form-control"><br>
+
+      <label>Password</label>
+      <input required name="church_people_reached" [(ngModel)]='data.password'type="password" class="form-control"><br>
+
+
+  
+      <button type="submit "(click)="form.checkValidity()? submitForm(): null"class="form-control btn btn-success ">Update account</button>
+
+    </form>
+</div>
+</div>

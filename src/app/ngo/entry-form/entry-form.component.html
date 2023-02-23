@@ -1,56 +1,56 @@
 <div class="container-fluid bg">
    
-        <ngx-spinner
-        bdColor="rgba(51,51,51,0.8)"
-        size="medium"
-        color="#fff"
-        type="ball-spin"
-      
-        [fullScreen] = "true"
-      >
-        <p style="font-size: 20px; color: white">Adding entry...</p>
-      </ngx-spinner>
+ 
     <div class="title"><i class="bi bi-speedometer"></i> {{title}}</div>
+    <div>Make entries of summaries of data collected from the field by volunteers</div>
 
     <div class="form-container">
-
-        <form>
+      <ngb-toast class=" bg-success text-light toast-container position-fixed left-0 " [autohide]="true" *ngIf="!staticAlertClosed" > {{successMessage}} </ngb-toast>
+        <form method="POST" ngNativeValidate #form>
             
             <label >Select Month</label><br>
 
             <input class="form-control" [(ngModel)]='data.month' type="month"  name="month"><br>
-            <label>Community Durbars</label>
-            <input required name="durbar" [(ngModel)]='data.durbar' type="number" class="form-control">
+
 
             <label>Sensitization sessions at churches</label>
             <input required name="churches" [(ngModel)]='data.churches'type="number" class="form-control">
 
+            <label>Number of people reached at church</label>
+            <input required name="church_people_reached" [(ngModel)]='data.church_people_reached'type="number" class="form-control">
+
             <label>Sensitization sessions at Mosques</label>
             <input required name="mosques" [(ngModel)]='data.mosques'type="number" class="form-control">
 
-            <label>Sensitization sessions at Community town halls</label>
+            <label>Number of people reached at mosques</label>
+            <input required name="mosque_people_reached" [(ngModel)]='data.mosque_people_reached'type="number" class="form-control">
+
+            <label>Community durbars/town hall meetings</label>
             <input required name="town_hall" [(ngModel)]='data.town_hall'type="number" class="form-control">
 
-            <label>Sensitization sessions at Markets</label>
-            <input required type="number" name="markets"[(ngModel)]='data.markets'class="form-control">
+            <label>Number of people reached at Community durbars/town hall meetings</label>
+            <input required name="town_hall_people_reached" [(ngModel)]='data.town_hall_people_reached'type="number" class="form-control">
 
-            <label>Sensitization sessions at Funerals</label>
-            <input required name="funerals" [(ngModel)]='data.funerals'type="number" class="form-control">
+            <label>Sensitization sessions at schools</label>
+            <input required name="schools" [(ngModel)]='data.schools'type="number" class="form-control">
 
-            <label>Video shows</label>
+            <label>Number of people reached in schools</label>
+            <input required name="schools_people_reached" [(ngModel)]='data.schools_people_reached'type="number" class="form-control">
+
+
+            <label>Number of Video shows</label>
             <input required name="video_shows" [(ngModel)]='data.video_shows'type="number" class="form-control">
 
-            <label>Community Announcements (Information Center)</label>
+            <label>Number of Community Announcements (Information Center)</label>
             <input required name="community_announcements"[(ngModel)]='data.community_announcements' type="number" class="form-control">
 
-            <label>Radio discussions</label>
-            <input name="radio"[(ngModel)]='data.radio' type="number" class="form-control">
+            <label>Number of Radio discussions</label>
+            <input required name="radio"[(ngModel)]='data.radio' type="number" class="form-control">
 
-            <label>Mobile van announcements</label>
+            <label>Number of Mobile van announcements</label>
             <input required type="number" name='van'[(ngModel)]='data.van'class="form-control">
 
-            <label>Total number of people reached through IE&C</label>
-            <input required name="iec_reached" [(ngModel)]='data.iec_reached'type="number" class="form-control">
+   
 
             <label>Total number of pregnant women identified</label>
             <input required name="pregnant_women_identified" type="number"[(ngModel)]='data.pregnant_women_identified' class="form-control">
@@ -60,27 +60,32 @@
 
             <header>Total Number of pregnant women who took any dose</header>
             <hr>
-            <label>IPTP1</label>
-            <input requiredtype="number"[(ngModel)]='data.iptp_one' name="iptp_one"class="form-control">
+            <label>IPTp1</label>
+            <input required type="number"[(ngModel)]='data.iptp_one' name="iptp_one"class="form-control">
 
-            <label>IPTP2</label>
+            <label>IPTp2</label>
             <input required name="durbar" [(ngModel)]='data.iptp_two'name="iptp_two"type="number" class="form-control">
 
-            <label>IPTP3</label>
+            <label>IPTp3</label>
             <input required type="number" [(ngModel)]='data.iptp_three'name="iptp_three" class="form-control">
 
-            <label>IPTP4</label>
-            <input  requiredt ype="number" [(ngModel)]='data.iptp_four'name="iptp_four" class="form-control">
+            <label>IPTp4</label>
+            <input  required type="number" [(ngModel)]='data.iptp_four'name="iptp_four" class="form-control">
 
-            <label>IPTP5</label>
+            <label>IPTp5</label>
             <input required type="number" [(ngModel)]='data.iptp_five 'name="iptp_five" class="form-control"><br>
-            <button (click)="submitForm()"class="form-control btn ">Add entry</button>
-            <p *ngIf="!loggedIn">
-                <ngb-alert [dismissible]="true" [type]="danger" >
-                    <strong>Entry is succesful</strong>
-                  </ngb-alert>
-    
-                </p>
+            <button type="submit "(click)="form.checkValidity()? submitForm(): null"class="form-control btn btn-success ">Add entry</button>
+        
         </form>
     </div>
 </div>
+<ngx-spinner
+bdColor="rgba(51,51,51,0.8)"
+size="medium"
+color="#fff"
+type="ball-spin"
+
+[fullScreen] = "true"
+>
+<p style="font-size: 20px; color: white">Adding entry...</p>
+</ngx-spinner>

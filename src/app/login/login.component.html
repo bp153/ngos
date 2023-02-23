@@ -7,20 +7,32 @@
 
   [fullScreen] = "true"
 >
-  <p style="font-size: 20px; color: white">Loading...</p>
+  <p style="font-size: 20px; color: white">Logging In...</p>
 </ngx-spinner>
   <div class="row row_height">
-    <div class="col login_img">23</div>
+    <div class="col row login_img justify-content-center  align-items-center">
+      <div class="app-title text-center">
+        <div class="title">Malaria NGOs Reporting System</div>
+        <div class="img-container">
+     Reporting Activities of Malaria NGos
+      </div>
+      </div>
+    </div>
     <div class="col col-sm-0">
         <div class="row justify-content-center  align-items-center login_container">
             <div class="card">
-                <form>
-                    <h2>Sign In</h2>
+          
+
+                <form ngNativeValidate #form>
+                    <h5>Sign In</h5>
                     <label>Username</label>
-                    <input type="text" [(ngModel)]='user.username' class="form-control" ><br>
+                    <input required type="text" [(ngModel)]='user.username' class="form-control" ><br>
                     <label>Password</label>
-                    <input type="password" [(ngModel)]='user.password' class="form-control"><br>
-                    <button (click)="logIn()"class="form-control btn ">Log In</button>
+                    <input required type="password" [(ngModel)]='user.password' class="form-control"><br>
+                    <button (click)="form.checkValidity()? logIn(): null" class="form-control btn btn-success ">Log In</button><br><br>
+            
+                    <ngb-alert type="danger" #staticAlert *ngIf="!staticAlertClosed" (closed)="staticAlertClosed = true"
+                      >{{successMessage}}</ngb-alert>
                 </form>
             </div>
         </div>

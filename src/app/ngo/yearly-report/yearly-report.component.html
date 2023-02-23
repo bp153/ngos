@@ -1,0 +1,72 @@
+<div class="container-fluid bg">
+  <div class="container-fluid">
+    <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-spin"
+  
+    [fullScreen] = "true"
+  >
+    <p style="font-size: 20px; color: white">Loading...</p>
+  </ngx-spinner>
+  <div class="title"><i class="bi bi-speedometer"></i> Yearly Report</div>
+  <div class="sub-title">Search,edit and download to excel entries for a particular year selected</div>
+    <form ngNativeValidate #form>
+        <label>Select Year</label>
+        <select required name="birth-year" class="form-control" name="year" [(ngModel)]='data.year'>
+            <option value="2026">2026</option>
+            <option value="2025">2025</option>
+            <option value="2024">2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+            <option value="2019">2019</option>
+            <option value="2018">2018</option>
+            <option value="2017">2017</option>
+            <option value="2016">2016</option>
+            <option value="2015">2015</option>
+            <option value="2014">2014</option>
+
+        </select><br>
+
+        <button (click)="form.checkValidity()? displayData(): null"  class="btn btn-success">Search</button>
+    </form>
+
+    {{response.length}} records found
+    <table class="table table-hover table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Month of Entry</th>
+            <th scope="col">Year</th>
+            <th scope="col">churches</th>
+            <th scope="col">mosques</th>
+            <th scope="col">town halls</th>
+            <th scope="col">Cannot be edited by</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+         
+            <tr *ngFor="let data of response; index as i">
+<td>{{i+1}}</td>
+<td>{{data.month}}</td>
+<td>{{data.year}}</td>
+<td>{{data.churches}}</td>
+<td>{{data.mosques}}</td>
+<td>{{data.town_halls}}</td>
+<td>{{data.expiry_date}}</td>
+<td><a href="/ngo/view-entry/{{data.id}}"><button class="btn edit-btn" >Edit</button></a></td>
+</tr>
+
+
+ 
+        </tbody>
+       
+        
+      </table>
+      <button (click)="exportData()" class="btn export">Export</button>
+</div>
+<router-outlet></router-outlet>

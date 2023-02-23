@@ -1,0 +1,30 @@
+
+.data-card{
+    padding:15px;
+    background-color: #ffffff !important;
+    font-size:14px;
+}
+
+
+
+.graph-card{
+    height:270px;
+}
+
+.myChart{
+    width:100%;
+    height:100%;
+}
+.row-margin{
+    margin-bottom:20px !important;
+}
+
+@media (max-width: 991.98px){ 
+    .data-card{
+        margin-bottom:20px;
+    }
+    .card-marg{
+        margin-bottom: 0;
+    }
+ }
+

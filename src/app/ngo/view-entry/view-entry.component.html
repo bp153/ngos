@@ -1,0 +1,90 @@
+<div class="container-fluid bg">
+   
+    <ngx-spinner
+    bdColor="rgba(51,51,51,0.8)"
+    size="medium"
+    color="#fff"
+    type="ball-spin"
+  
+    [fullScreen] = "true"
+  >
+    <p style="font-size: 20px; color: white">Updating entry...</p>
+  </ngx-spinner>
+<div class="title"><i class="bi bi-speedometer"></i> {{title}}</div>
+
+<div class="form-container">
+  <ngb-toast class=" bg-success text-light toast-container position-fixed left-0 " [autohide]="true" *ngIf="!staticAlertClosed" > {{successMessage}} </ngb-toast>
+    <div class="title">Changes to this entry should be made by {{data.expiry_date}}</div>
+    <form method="POST" ngNativeValidate #form>
+            
+      <label >Select Month</label><br>
+
+      <input class="form-control" [(ngModel)]='data.month' type="month"  name="month"><br>
+
+
+      <label>Sensitization sessions at churches</label>
+      <input required name="churches" [(ngModel)]='data.churches'type="number" class="form-control">
+
+      <label>Number of people reached at church</label>
+      <input required name="church_people_reached" [(ngModel)]='data.church_people_reached'type="number" class="form-control">
+
+      <label>Sensitization sessions at Mosques</label>
+      <input required name="mosques" [(ngModel)]='data.mosques'type="number" class="form-control">
+
+      <label>Number of people reached at mosques</label>
+      <input required name="mosque_people_reached" [(ngModel)]='data.mosque_people_reached'type="number" class="form-control">
+
+      <label>Community durbars/town hall meetings</label>
+      <input required name="town_halls" [(ngModel)]='data.town_halls'type="number" class="form-control">
+
+      <label>Number of people reached at Community durbars/town hall meetings</label>
+      <input required name="town_hall_people_reached" [(ngModel)]='data.town_hall_people_reached'type="number" class="form-control">
+
+      <label>Sensitization sessions at schools</label>
+      <input required name="schools" [(ngModel)]='data.schools'type="number" class="form-control">
+
+      <label>Number of people reached in schools</label>
+      <input required name="school_people_reached" [(ngModel)]='data.school_people_reached'type="number" class="form-control">
+
+
+      <label>Number of Video shows</label>
+      <input required name="video_shows" [(ngModel)]='data.video_shows'type="number" class="form-control">
+
+      <label>Number of Community Announcements (Information Center)</label>
+      <input required name="	information_center"[(ngModel)]='data.	information_center' type="number" class="form-control">
+
+      <label>Number of Radio discussions</label>
+      <input required name="radio_discussion"[(ngModel)]='data.radio_discussion' type="number" class="form-control">
+
+      <label>Number of Mobile van announcements</label>
+      <input required type="number" name='mobile_van'[(ngModel)]='data.mobile_van'class="form-control">
+
+
+
+      <label>Total number of pregnant women identified</label>
+      <input required name="pregnant_women_identified" type="number"[(ngModel)]='data.pregnant_women_identified' class="form-control">
+
+      <label>Total number of pregnant women followed up</label>
+      <input required name="pregnant_women_followed_up"[(ngModel)]='data.pregnant_women_followed_up' type="number" class="form-control">
+
+      <header>Total Number of pregnant women who took any dose</header>
+      <hr>
+      <label>IPTp1</label>
+      <input required type="number"[(ngModel)]='data.iptp_one' name="iptp_one"class="form-control">
+
+      <label>IPTp2</label>
+      <input required name="durbar" [(ngModel)]='data.iptp_two'name="iptp_two"type="number" class="form-control">
+
+      <label>IPTp3</label>
+      <input required type="number" [(ngModel)]='data.iptp_three'name="iptp_three" class="form-control">
+
+      <label>IPTp4</label>
+      <input  required type="number" [(ngModel)]='data.iptp_four'name="iptp_four" class="form-control">
+
+      <label>IPTp5</label>
+      <input required type="number" [(ngModel)]='data.iptp_five 'name="iptp_five" class="form-control"><br>
+      <button type="submit "(click)="form.checkValidity()? submitForm(): null"class="form-control btn btn-success ">Updatw entry</button>
+
+    </form>
+</div>
+</div>

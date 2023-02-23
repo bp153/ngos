@@ -1,0 +1,138 @@
+<ngx-spinner
+bdColor="rgba(51,51,51,0.8)"
+size="medium"
+color="#fff"
+type="ball-spin"
+name="spinner2"
+[fullScreen] = "true"
+>
+<p style="font-size: 20px; color: white">Loading dashboard...</p>
+</ngx-spinner>
+<div class="container-fluid bg">
+
+
+    <div class="title"><i class="bi bi-speedometer"></i>{{year}} {{title}}</div>
+    <div>Summary of data keyed in for {{year}}</div>
+  <div class="row row-margin">
+    <div class="col-lg-3 col-md-6">
+      <div class="card data-card">
+        <div>Total number of reports submitted</div>
+        <div class="row">
+          <div class="col-6"><i class="bi bi-view-list"></i></div>
+          <div class="col-6"><div class="float-end">{{lifetime||0}}</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="card data-card">
+        <div>Sensitizations at mosque</div>
+                <div class="row">
+          <div class="col-6"><i class="bi bi-view-list"></i></div>
+          <div class="col-6"><div class="float-end">{{mosque||0}}</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="card data-card">
+        <div>Sensitizations at church</div>
+                <div class="row">
+          <div class="col-6"><i class="bi bi-buildings-fill"></i></div>
+          <div class="col-6"><div class="float-end">{{church||0}}</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="card data-card card-marg">
+        <div>Community durbars</div>
+                <div class="row">
+          <div class="col-6"><i class="bi bi-building"></i></div>
+          <div class="col-6"><div class="float-end">{{community_aannouncement||0}}</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-margin">
+    <div class="col-lg-3 col-md-6">
+      <div class="card data-card">
+        <div>Sensitization sessions at schools</div>
+                <div class="row">
+          <div class="col-6"><i class="bi bi-shop-window"></i></div>
+          <div class="col-6"><div class="float-end">{{schools||0}}</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="card data-card">
+        <div>Mobile Van Announcements</div>
+                <div class="row">
+          <div class="col-6"><i class="bi bi-car-front-fill"></i></div>
+          <div class="col-6"><div class="float-end">{{mobile_van||0}}</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="card data-card">
+        <div>Video shows</div>
+                <div class="row">
+          <div class="col-6"><i class="bi bi-camera-reels-fill"></i></div>
+          <div class="col-6"><div class="float-end">{{video_shows||0}}</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-3 col-md-6">
+      <div class="card data-card card-marg">
+        <div>Radio announcements</div>
+                <div class="row">
+          <div class="col-6"><i class="bi bi-music-player"></i></div>
+          <div class="col-6"><div class="float-end">{{radio_discussion||0}}</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row row-margin">
+    <div class="col-lg-6">
+      <div class="card graph-card">
+        <ngx-spinner name="spinner4" [fullScreen]="false" type="ball-clip-rotate-multiple" size="medium">
+          <p style="font-size: 20px; color: white">Loading chart...</p>
+        </ngx-spinner>
+        <canvas  id="people-Chart"></canvas>
+      </div>
+    </div>
+    <div class="col-lg-6">
+     
+      <div class="card graph-card">
+        <ngx-spinner name="spinner1" [fullScreen]="false" type="ball-clip-rotate-multiple" size="medium">
+          <p style="font-size: 20px; color: white">Loading chart...</p>
+        </ngx-spinner>
+       <canvas id="media-Chart"></canvas>
+      
+      </div>
+    </div>
+  </div>
+  <div class="row row-margin">
+    <div class="col-lg-6">
+      <div class="card graph-card">
+        <ngx-spinner name="spinner3" [fullScreen]="false" type="ball-clip-rotate-multiple" size="medium">
+          <p style="font-size: 20px; color: white">Loading chart...</p>
+        </ngx-spinner>
+        <canvas id="senisitization-Chart"></canvas>
+  
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card graph-card">
+        <ngx-spinner name="spinner5" [fullScreen]="false" type="ball-clip-rotate-multiple" size="medium">
+          <p style="font-size: 20px; color: white">Loading chart...</p>
+        </ngx-spinner>
+        <canvas id="myChart"></canvas>
+      
+      </div>
+    </div>
+
+
+  </div>
+
+
+</div>

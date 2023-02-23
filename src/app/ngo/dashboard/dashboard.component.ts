@@ -1,14 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import {
-  AuthChangeEvent,
-  AuthSession,
-  createClient,
-  Session,
-  SupabaseClient,
-  User,
-} from '@supabase/supabase-js';
-
+import { NgoServiceService } from '../../service/ngo-service.service';
+import { AuthServiceService } from '../../auth-service.service';
+import { Chart, registerables } from 'chart.js';
+import { NgxSpinnerService } from 'ngx-spinner';
+Chart.register(...registerables);
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
@@ -17,186 +13,197 @@ import {
 export class DashboardComponent implements OnInit {
   public title: String;
   public data: any;
-  private supabase: SupabaseClient;
+
   public lifetime: any;
   public mosque: any;
   public church: any;
   public community_aannouncement: any;
-  public markets: any;
+  public schools: any;
   public radio_discussion: any;
   public mobile_van: any;
   public video_shows: any;
-public info:any
-public dataSource:Object
-  constructor() {
+  public info: any;
+  public user_data: any;
+  public ngo_id: any;
+  public entries: any;
+  public iptp_data: any;
+  public sensitization_data: any;
+  public media_engagement:any
+  public people_reached:any
+  kk: any;
+  ngo_name:any
+spinner1:any
+spinner2:any
+  constructor(
+    private auth: AuthServiceService,
+    private ngoService: NgoServiceService,
+    private spinner:NgxSpinnerService
+  ) {
     this.title = 'Dashboard';
-    this.supabase = createClient(
-      environment.supabaseUrl,
-      environment.supabaseKey
-    );
-    this.data = [];
-
-    const chartData = [
-      {
-        label: "Venezuela",
-        value: "290"
-      },
-      {
-        label: "Saudi",
-        value: "260"
-      },
-      {
-        label: "Canada",
-        value: "180"
-      },
-      {
-        label: "Iran",
-        value: "140"
-      },
-      {
-        label: "Russia",
-        value: "115"
-      },
-      {
-        label: "UAE",
-        value: "100"
-      },
-      {
-        label: "US",
-        value: "30"
-      },
-      {
-        label: "China",
-        value: "30"
-      }
-    ];
-    // STEP 3 - Chart Configuration
-    const dataSource = {
-      chart: {
-        //Set the chart caption
-        caption: "Countries With Most Oil Reserves [2017-18]",
-        //Set the chart subcaption
-        subCaption: "In MMbbl = One Million barrels",
-        //Set the x-axis name
-        xAxisName: "Country",
-        //Set the y-axis name
-        yAxisName: "Reserves (MMbbl)",
-        numberSuffix: "K",
-        //Set the theme for your chart
-        theme: "fusion"
-      },
-      // Chart Data - from step 2
-      data: chartData
-    };
-    this.dataSource = dataSource;
+    this.setVariable();
+  
   }
 
   ngOnInit(): void {
-    this.getData();
-    this.dashboard()
+    this.getDashboard();
+    //this.getEntries();
+    this.getIptpData();
+    this.sensitization();
+    this.media()
+    this.peopleReached()
+    
   }
 
-  dashboard(){
-this.supabase
-      .from('entries')
-      .select('*')
-      .limit(5)
-      .order('id', { ascending: false })
-      .then(
-        (data) => {
-          this.info = data.data;
-      
-  
+  getEntries() {
+    this.ngoService.lastFiveEntries(this.ngo_id).subscribe((data) => {
+      this.entries = data;
+    });
+  }
 
+  getDashboard() {
+    this.spinner.show("spinner2")
+    this.ngoService.ngoDashboard(this.ngo_id).subscribe((data) => {
+      this.data = data;
+      this.lifetime = this.data[0].total_entries;
+      this.mosque = this.data[0].mosques;
+      this.church = this.data[0].church;
+      this.community_aannouncement = this.data[0].town_halls;
+      this.schools = this.data[0].schools;
+      this.radio_discussion = this.data[0].radio_discussion;
+      this.mobile_van = this.data[0].mobile_van;
+      this.video_shows = this.data[0].video_shows;
+      this.spinner.hide("spinner2")
+    },(error)=>{
+      this.spinner.hide("spinner2")
+    });
+  }
+
+  setVariable() {
+    this.data = [];
+    this.kk = this.auth.getUser();
+    this.user_data = JSON.parse(this.kk);
+    this.ngo_id = this.user_data.ngo_id;
+    console.log(this.ngo_id);
+    
+  }
+
+  getIptpData() {
+    this.spinner.show("spinner1");
+    this.ngoService.iptpData(this.ngo_id).subscribe((data) => {
+      this.iptp_data = data;
+      this.spinner.hide("spinner1");
+      var myChart = new Chart('myChart', {
+        type: 'bar',
+
+        data: {
+          datasets: [
+            {
+              label: 'Iptp intake during follow up',
+              data: this.iptp_data[0],
+              backgroundColor: '#92B4A2',
+            },
+          ],
         },
-        (error) => {
-          console.log(error);
-        }
-      );
-  }
-  getData() {
-    this.supabase
-      .from('entries')
-      .select('*')
-
-      .then(
-        (data) => {
-          this.data = data.data;
-          console.log(this.data);
-          this.lifetimeSubmissions(this.data);
-          this.totalMosque(this.data);
-          this.totalChurch(this.data);
-          this.totalCommunity(this.data);
-          this.totalMarkets(this.data)
-          this.totalRadio(this.data)
-          this.totalVan(this.data)
-          this.totalVideo(this.data)
-
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
         },
-        (error) => {
-          console.log(error);
-        }
-      );
+      });
+    });
   }
 
-  lifetimeSubmissions(data: any) {
-    this.lifetime = data.length;
+  sensitization() {
+    this.spinner.show("spinner3")
+    this.ngoService.pregnantWomen(this.ngo_id).subscribe((data) => {
+      this.sensitization_data = data;
+      var myChart = new Chart('senisitization-Chart', {
+        type: 'bar',
+
+        data: {
+          datasets: [
+            {
+              label: 'Media Sensitization',
+              data: this.sensitization_data[0],
+              backgroundColor: '#F1E19C',
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+      this.spinner.hide("spinner3")
+    },(error)=>{
+      this.spinner.hide("spinner3")
+    });
   }
 
-  totalMosque(data: any) {
-    this.mosque = data.reduce((accuulator: any, object: any) => {
-      return accuulator + object.mosques;
-    }, 0);
+  media(){
+    this.spinner.show("spinner5")
+    this.ngoService.mediaEngagement(this.ngo_id).subscribe((data) => {
+      this.media_engagement= data;
+      this.spinner.hide("spinner5")
+      var myChart = new Chart('media-Chart', {
+        type: 'bar',
+
+        data: {
+          datasets: [
+            {
+              label: 'Media Engagement',
+              data: this.media_engagement[0],
+              backgroundColor: '#69B6F4',
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+    },(error)=>{
+      this.spinner.show("spinner5")
+    });
   }
 
-  totalChurch(data: any) {
-    this.church = data.reduce((accuulator: any, object: any) => {
-      return accuulator + object.churches;
-    }, 0);
+  peopleReached(){
+    this.spinner.show("spinner4")
+    this.ngoService.peopleReached(this.ngo_id).subscribe((data) => {
+      this.people_reached= data;
+      var myChart = new Chart('people-Chart', {
+        type: 'bar',
+
+        data: {
+          datasets: [
+            {
+              label: 'People Reached in various sensitization activities',
+              data: this.people_reached[0],
+              backgroundColor: '#C7A9EC',
+            },
+          ],
+        },
+        options: {
+          scales: {
+            y: {
+              beginAtZero: true,
+            },
+          },
+        },
+      });
+      this.spinner.hide("spinner4")
+    },(error)=>{
+      this.spinner.hide("spinner4")
+    });
   }
 
-  totalCommunity(data: any) {
-    this.community_aannouncement = data.reduce(
-      (accuulator: any, object: any) => {
-        return accuulator + object.community_announcement;
-      },
-      0
-    );
-  }
 
-  totalMarkets(data:any){
-    this.markets = data.reduce(
-      (accuulator: any, object: any) => {
-        return accuulator + object.markets;
-      },
-      0
-    );
-  }
-
-  totalRadio(data:any){
-    this.radio_discussion = data.reduce(
-      (accuulator: any, object: any) => {
-        return accuulator + object.radio_discussion;
-      },
-      0
-    );
-  }
-
-  totalVan(data:any){
-    this.mobile_van = data.reduce(
-      (accuulator: any, object: any) => {
-        return accuulator + object.mobile_van;
-      },
-      0
-    );
-  }
-
-  totalVideo(data:any){
-    this.video_shows = data.reduce(
-      (accuulator: any, object: any) => {
-        return accuulator + object.video_shows;
-      },
-      0
-    );
-  }
 }

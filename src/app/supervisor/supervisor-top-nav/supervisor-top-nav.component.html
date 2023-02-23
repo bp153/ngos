@@ -1,0 +1,42 @@
+<nav class="navbar fixed-top navbar-expand-lg bg-light ">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">NGOs</a>
+      
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      
+      <div  class="collapse navbar-collapse " id="navbarNav">
+        <ul class="nav  navbar-nav text-color-light">
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/supervisor/dashboard" aria-current="page" href="#">Dashboard</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/supervisor/add-user" aria-current="page" href="#">Add User</a>
+          </li>
+
+
+
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/supervisor/ngo-statistics" aria-current="page" href="#">NGO Statistics</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link active" routerLink="/supervisor/reports" aria-current="page" href="#">Reports</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+             {{full_name[0].first_name}} {{full_name[0].last_name}}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="#">Settings</a></li>
+              <li><a class="dropdown-item" href="#">Account</a></li>
+              <li (click)="logout()"> <a class="dropdown-item" href="#">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+   
+      </div>
+    </div>
+  </nav>
