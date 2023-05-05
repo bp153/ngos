@@ -125,7 +125,7 @@ spinner2:any
         data: {
           datasets: [
             {
-              label: 'Media Sensitization',
+              label: 'Pregnant Women',
               data: this.sensitization_data[0],
               backgroundColor: '#F1E19C',
             },
