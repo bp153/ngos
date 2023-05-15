@@ -34,7 +34,7 @@ export class EntryFormComponent implements OnInit {
     private auth: AuthServiceService,
     private ngoService: NgoServiceService
   ) {
-    this.title = 'Entry Form';
+    this.title = 'Data Entry Form';
     this.successMessage = '';
     this.loggedIn = true;
     this.danger = 'success';
