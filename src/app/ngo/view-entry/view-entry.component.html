@@ -17,10 +17,6 @@
     <div class="title">Changes to this entry should be made by {{data.expiry_date}}</div>
     <form method="POST" ngNativeValidate #form>
             
-      <label >Select Month</label><br>
-
-      <input class="form-control" [(ngModel)]='data.month' type="month"  name="month"><br>
-
 
       <label>Sensitization sessions at churches</label>
       <input required name="churches" [(ngModel)]='data.churches'type="number" class="form-control">
